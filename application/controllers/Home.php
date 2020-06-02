@@ -30,16 +30,5 @@ class Home extends CI_Controller {
         );
         $this->load->view('view', $data);
     }
-
-    /* function prosesdaftar() {
-        $this->load->model('UserModel', ', TRUE);
-        $user = array(
-            'username' => $this->input->post('username'),
-            'password' => $this->input->post('password'),
-            'nama' => $this->input->post('nama'),
-        );
-
-        redirect(site_url('home/register'));
-    } */
 }
 ?>
