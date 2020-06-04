@@ -35,68 +35,27 @@
     <div><p class="font-weight-bold mb-0">Cuaca Hari Ini</p></div>
 </div>
 <div class="row mx-n2">
-    <div class="p-2">
-        <div class="h-100 col col-12 bg-white p-3 rounded-theme-md">
-            <p class="mb-2 text-center text-muted">08.00</p>
-            <div class="row justify-content-center">
-                <img src="https://www.accuweather.com/images/weathericons/4.svg" class="mb-2" width="50" alt="Ikon jenis cuaca" />
+    
+    <?php
+        $forecasts_12hour = $this->forecasts_12hour;
+        for ($row=0; $row<count($forecasts_12hour); $row++) { ?>
+            <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 p-2">
+                <div class="h-100 col col-12 bg-white p-3 rounded-theme-md">
+                    <p class="mb-2 text-center text-muted"><?= $forecasts_12hour[$row]['DateTime'] ?></p>
+                    <div class="row justify-content-center">
+                        <img src="https://www.accuweather.com/images/weathericons/<?= $forecasts_12hour[$row]['WeatherIcon'] ?>.svg" class="mb-2" width="50" alt="<?= $forecasts_12hour[$row]['IconPhrase']; ?>" />
+                    </div>
+                    <p class="text-center mb-1"><?= $forecasts_12hour[$row]['IconPhrase']; ?></p>
+                    <div class="row mb-1 justify-content-center">
+                        <p class="mb-0 mr-1"><?= $forecasts_12hour[$row]['Temperature']['Value']; ?>°C</p>
+                        <p class="mb-0 text-muted"><?= $forecasts_12hour[$row]['RealFeelTemperature']['Value'] ?>°C</p>
+                    </div>
+                    <p class="text-center mb-1"><?= $forecasts_12hour[$row]['Wind']['Direction']['Degrees']; ?> - <?= $forecasts_12hour[$row]['Wind']['Speed']['Value'] ?>km/j</p>
+                    <p class="text-center mb-1"><?= $forecasts_12hour[$row]['UVIndex']; ?> (<?= $forecasts_12hour[$row]['UVIndexText'] ?>)</p>
+                    <p class="text-center mb-1"><?= $forecasts_12hour[$row]['RelativeHumidity'] ?>%</p>
+                </div>
             </div>
-            <p class="text-center mb-1">Badai petir</p>
-            <div class="row mb-1 justify-content-center">
-                <p class="mb-0 mr-1">29°C</p>
-                <p class="mb-0 text-muted">23°C</p>
-            </div>
-            <p class="text-center mb-1">Selatan - 2km/j</p>
-            <p class="text-center mb-1">0 (Rendah)</p>
-            <p class="text-center mb-1">86%</p>
-        </div>
-    </div>
-    <div class="p-2">
-        <div class="h-100 col col-12 bg-white p-3 rounded-theme-md">
-            <p class="mb-2 text-center text-muted">09.00</p>
-            <div class="row justify-content-center">
-                <img src="https://www.accuweather.com/images/weathericons/4.svg" class="mb-2" width="50" alt="Ikon jenis cuaca" />
-            </div>
-            <p class="text-center mb-1">Badai petir</p>
-            <div class="row mb-1 justify-content-center">
-                <p class="mb-0 mr-1">29°C</p>
-                <p class="mb-0 text-muted">23°C</p>
-            </div>
-            <p class="text-center mb-1">Selatan - 2km/j</p>
-            <p class="text-center mb-1">0 (Rendah)</p>
-            <p class="text-center mb-1">86%</p>
-        </div>
-    </div>
-    <div class="p-2">
-        <div class="h-100 col col-12 bg-white p-3 rounded-theme-md">
-            <p class="mb-2 text-center text-muted">10.00</p>
-            <div class="row justify-content-center">
-                <img src="https://www.accuweather.com/images/weathericons/4.svg" class="mb-2" width="50" alt="Ikon jenis cuaca" />
-            </div>
-            <p class="text-center mb-1">Badai petir</p>
-            <div class="row mb-1 justify-content-center">
-                <p class="mb-0 mr-1">29°C</p>
-                <p class="mb-0 text-muted">23°C</p>
-            </div>
-            <p class="text-center mb-1">Selatan - 2km/j</p>
-            <p class="text-center mb-1">0 (Rendah)</p>
-            <p class="text-center mb-1">86%</p>
-        </div>
-    </div>
-    <div class="p-2">
-        <div class="h-100 col col-12 bg-white p-3 rounded-theme-md">
-            <p class="mb-2 text-center text-muted">11.00</p>
-            <div class="row justify-content-center">
-                <img src="https://www.accuweather.com/images/weathericons/4.svg" class="mb-2" width="50" alt="Ikon jenis cuaca" />
-            </div>
-            <p class="text-center mb-1">Badai petir</p>
-            <div class="row mb-1 justify-content-center">
-                <p class="mb-0 mr-1">29°C</p>
-                <p class="mb-0 text-muted">23°C</p>
-            </div>
-            <p class="text-center mb-1">Selatan - 2km/j</p>
-            <p class="text-center mb-1">0 (Rendah)</p>
-            <p class="text-center mb-1">86%</p>
-        </div>
-    </div>
+            <?php
+        }
+    ?>
 </div>

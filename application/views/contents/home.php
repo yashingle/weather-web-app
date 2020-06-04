@@ -1,15 +1,19 @@
+<?php
+    $currentconditions = $this->currentconditions;
+?>
+
 <div class="row mx-n2">
     <!-- Data dari sidebar -->
     <div class="col-sm-12 p-2 d-md-none">
         <div class="row h-100 bg-white m-0 p-3 rounded-theme-md justify-content-between">
             <div class="col align-self-center">
-                <p class="m-0 display-4">29°C</p>
-                <p class="m-0">Bandung <span class="text-muted">· Senin, 12.00</span></p>
+                <p class="m-0 display-4"><?= $currentconditions['Temperature']['Metric']['Value'] ?>°C</p>
+                <p class="m-0">Bandung <span class="text-muted">· Senin, <?= $currentconditions['LocalObservationDateTime'] ?></span></p>
             </div>
             <div class="m-0 align-self-center">
                 <div class="col m-0">
-                    <img src="https://www.accuweather.com/images/weathericons/14.svg" class="" height="80" alt="Ikon jenis cuaca" />
-                    <p class="m-0 mt-1 text-center">Badai petir</p>
+                    <img src="https://www.accuweather.com/images/weathericons/<?= $currentconditions['WeatherIcon'] ?>.svg" class="" height="80" alt="<?= $currentconditions['WeatherText'] ?>" />
+                    <p class="m-0 mt-1 text-center"><?= $currentconditions['WeatherText'] ?></p>
                 </div>
             </div>
         </div>
@@ -38,34 +42,34 @@
     <div><a href="<?= site_url('home/today') ?>" class="text-muted">Detail perjam ➡</a></div>
 </div><!--  -->
 <div class="row mx-n2">
-    <div class="col-sm-4 col-md-3 p-2">
+    <div class="col-sm-4 col-md-4 col-lg-3 p-2">
         <div class="h-100 col col-12 bg-white p-4 rounded-theme-lg">
             <p class="text-muted">Indeks UV</p>
-            <p class="h1">5</p>
-            <p class="mb-0">👌 Moderat</p>
+            <p class="h1"><?= $currentconditions['UVIndex'] ?></p>
+            <p class="mb-0"><!-- 👌 --> <?= $currentconditions['UVIndexText'] ?></p>
         </div>
     </div>
-    <div class="col-sm-4 col-md-3 p-2">
+    <div class="col-sm-4 col-md-4 col-lg-3 p-2">
         <div class="h-100 col col-12 bg-white p-4 rounded-theme-lg">
             <p class="text-muted text">Angin</p>
             <div class="row px-3">
-                <p class="h1">8.5</p>
+                <p class="h1"><?= $currentconditions['Wind']['Speed']['Metric']['Value'] ?></p>
                 <p class="align-self-end mb-2 ml-1">km/jam</p>
             </div>
-            <p class="mb-0">⬇ Selatan</p>
+            <p class="mb-0"><!-- ⬇ --> <?= $currentconditions['Wind']['Direction']['Degrees'] ?></p>
         </div>
     </div>
-    <div class="col-sm-4 col-md-3 p-2">
+    <div class="col-sm-4 col-md-4 col-lg-3 p-2">
         <div class="h-100 col col-12 bg-white p-4 rounded-theme-lg">
             <p class="text-muted">Kelembaban</p>
-            <p class="h1">78%</p>
-            <p class="mb-0">👎 Lembab</p>
+            <p class="h1"><?= $currentconditions['RelativeHumidity'] ?></p>
+            <p class="mb-0"><!-- 👎  <?= $currentconditions ?> --></p>
         </div>
     </div>
-    <div class="col-sm-4 col-md-3 p-2">
+    <div class="col-sm-4 col-md-4 col-lg-3 p-2">
         <div class="h-100 col col-12 bg-white p-4 rounded-theme-lg">
             <p class="text-muted">Terasa seperti</p>
-            <p class="h1">23°C</p>
+            <p class="h1"><?= $currentconditions['RealFeelTemperature']['Metric']['Value'] ?>°C</p>
         </div>
     </div>
 </div>
@@ -75,69 +79,23 @@
     <div><p class="font-weight-bold mb-0">Cuaca Dalam Lima Hari</p></div>
 </div>
 <div class="row mx-n2">
-    <div class="p-2">
-        <div class="h-100 col col-12 bg-white p-3 rounded-theme-md">
-            <p class="mb-2 text-center text-muted">Hari ini</p>
-            <div class="row justify-content-center">
-                <img src="https://www.accuweather.com/images/weathericons/4.svg" class="mb-2" width="50" alt="Ikon jenis cuaca" />
+    <?php
+        $forecasts_5day = $this->forecasts_5day['DailyForecasts'];
+        for ($row=0; $row<count($forecasts_5day); $row++) { ?>
+            <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 p-2">
+                <div class="h-100 col col-12 bg-white p-3 rounded-theme-md">
+                    <p class="mb-2 text-center text-muted"><?= $forecasts_5day[$row]['Date'] ?></p>
+                    <div class="row justify-content-center">
+                        <img src="https://www.accuweather.com/images/weathericons/<?= $forecasts_5day[$row]['Day']['Icon'] ?>.svg" class="mb-2" width="50" alt="<?= $forecasts_5day[$row]['Day']['IconPhrase'] ?>" />
+                    </div>
+                    <p class="text-center mb-1"><?= $forecasts_5day[$row]['Day']['IconPhrase'] ?></p>
+                    <div class="row m-0 justify-content-center">
+                        <p class="mb-0 mr-1"><?= ($forecasts_5day[$row]['Temperature']['Maximum']['Value'] + $forecasts_5day[$row]['Temperature']['Minimum']['Value']) / 2 ?>°C</p>
+                        <p class="mb-0 text-muted"><?= ($forecasts_5day[$row]['RealFeelTemperature']['Maximum']['Value'] + $forecasts_5day[$row]['RealFeelTemperature']['Minimum']['Value']) / 2 ?>°C</p>
+                    </div>
+                </div>
             </div>
-            <p class="text-center mb-1">Badai petir</p>
-            <div class="row m-0 justify-content-center">
-                <p class="mb-0 mr-1">29°C</p>
-                <p class="mb-0 text-muted">23°C</p>
-            </div>
-        </div>
-    </div>
-    <div class="p-2">
-        <div class="h-100 col col-12 bg-white p-3 rounded-theme-md">
-            <p class="mb-2 text-center text-muted">Selasa</p>
-            <div class="row justify-content-center">
-                <img src="https://www.accuweather.com/images/weathericons/32.svg" class="mb-2" width="50" alt="Ikon jenis cuaca" />
-            </div>
-            <p class="text-center mb-1">Badai petir</p>
-            <div class="row m-0 justify-content-center">
-                <p class="mb-0 mr-1">29°C</p>
-                <p class="mb-0 text-muted">23°C</p>
-            </div>
-        </div>
-    </div>
-    <div class="p-2">
-        <div class="h-100 col col-12 bg-white p-3 rounded-theme-md">
-            <p class="mb-2 text-center text-muted">Rabu</p>
-            <div class="row justify-content-center">
-                <img src="https://www.accuweather.com/images/weathericons/1.svg" class="mb-2" width="50" alt="Ikon jenis cuaca" />
-            </div>
-            <p class="text-center mb-1">Badai petir</p>
-            <div class="row m-0 justify-content-center">
-                <p class="mb-0 mr-1">29°C</p>
-                <p class="mb-0 text-muted">23°C</p>
-            </div>
-        </div>
-    </div>
-    <div class="p-2">
-        <div class="h-100 col col-12 bg-white p-3 rounded-theme-md">
-            <p class="mb-2 text-center text-muted">Kamis</p>
-            <div class="row justify-content-center">
-                <img src="https://www.accuweather.com/images/weathericons/7.svg" class="mb-2" width="50" alt="Ikon jenis cuaca" />
-            </div>
-            <p class="text-center mb-1">Badai petir</p>
-            <div class="row m-0 justify-content-center">
-                <p class="mb-0 mr-1">29°C</p>
-                <p class="mb-0 text-muted">23°C</p>
-            </div>
-        </div>
-    </div>
-    <div class="p-2">
-        <div class="h-100 col col-12 bg-white p-3 rounded-theme-md">
-            <p class="mb-2 text-center text-muted">Jumat</p>
-            <div class="row justify-content-center">
-                <img src="https://www.accuweather.com/images/weathericons/41.svg" class="mb-2" width="50" alt="Ikon jenis cuaca" />
-            </div>
-            <p class="text-center mb-1">Badai petir</p>
-            <div class="row m-0 justify-content-center">
-                <p class="mb-0 mr-1">29°C</p>
-                <p class="mb-0 text-muted">23°C</p>
-            </div>
-        </div>
-    </div>
+            <?php
+        }
+    ?>
 </div>
