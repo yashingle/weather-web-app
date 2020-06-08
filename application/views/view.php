@@ -14,17 +14,26 @@
 
     <!-- Bootstrap core CSS -->
     <link href="<?= base_url('assets/vendor/bootstrap/css/bootstrap.min.css') ?>" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" rel="stylesheet">
+    
+    <!-- Chartjs -->
+    <link href="<?= base_url('assets/vendor/chartjs/Chart.min.css') ?>" rel="stylesheet">
+    <script src="<?= base_url('assets/vendor/chartjs/Chart.bundle.min.js') ?>"></script>
 
     <!-- Custom styles for this template -->
     <link href="<?= base_url('assets/css/simple-sidebar.css') ?>" rel="stylesheet">
 </head>
 
 <body>
-
+    
     <div class="d-flex" id="wrapper">
 
         <!-- Sidebar -->
-        <?= $sidebar ?>
+        <div id="sidebar-wrapper">
+            <?= $sidebar ?>
+        </div>
 
         <!-- Page Content -->
         <div id="page-content-wrapper">

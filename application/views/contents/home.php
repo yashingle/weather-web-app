@@ -1,14 +1,19 @@
-<?php
-    $currentconditions = $this->currentconditions;
-?>
-
-<div class="row mx-n2">
-    <!-- Data dari sidebar -->
-    <div class="col-sm-12 p-2 d-md-none">
+<!-- Data dari sidebar -->
+<div class="row mx-n2 d-md-none">
+    <?php
+        $currentconditions = $this->currentconditions;
+    ?>
+    <div class="col-sm-12 p-2">
         <div class="row h-100 bg-white m-0 p-3 rounded-theme-md justify-content-between">
             <div class="col align-self-center">
-                <p class="m-0 display-4"><?= $currentconditions['Temperature']['Metric']['Value'] ?>°C</p>
-                <p class="m-0">Bandung <span class="text-muted">· Senin, <?= $currentconditions['LocalObservationDateTime'] ?></span></p>
+                <p class="m-0 display-4">
+                    <?= $currentconditions['Temperature']['Metric']['Value'] ?>°C
+                </p>
+                <p class="m-0">
+                    <?= $this->session->location_localized_name ?><span class="text-muted"> · 
+                    <?= $this->day ?>, <?= $this->time ?></span> 
+                    <small class="text-muted"><i class="fa fa-info-circle fa text-sm-left" data-toggle="tooltip" data-placement="bottom" title="Waktu setempat. Data ditampilkan per 5 menit."></i></small>
+                </p>
             </div>
             <div class="m-0 align-self-center">
                 <div class="col m-0">
@@ -20,26 +25,20 @@
     </div>
 </div>
 
-<div class="row mx-n2">
-    <!-- Indices -->
+<!-- Indices -->
+<!-- <div class="row mx-n2">
     <div class="col-lg-6 col-md-12 p-2">
         <div class="row h-100 bg-white m-0 p-3 rounded-theme-md">
             <p class="mb-0">Indices</p>
         </div>
     </div>
-    
-    <!-- Apa ya namanya -->
-    <div class="col-lg-6 col-md-12 p-2">
-        <div class="row h-100 bg-white m-0 p-3 rounded-theme-md">
-            <p class="mb-0">Cek tanggal yang cuacanya cerah</p>
-        </div>
-    </div>
-</div>
+</div> -->
 
 <!-- Sorotan Hari Ini -->
 <div class="row d-flex justify-content-between mx-0 mt-4 mb-2">
     <div><p class="font-weight-bold mb-0">Sorotan Hari Ini</p></div>
-    <div><a href="<?= site_url('home/today') ?>" class="text-muted">Detail perjam ➡</a></div>
+    <div><a href="<?= site_url('home/today') ?>" class="text-muted">Detail perjam <i class="fa fa-arrow-right" aria-hidden="true"></i>
+</a></div>
 </div><!--  -->
 <div class="row mx-n2">
     <div class="col-sm-4 col-md-4 col-lg-3 p-2">
@@ -56,7 +55,7 @@
                 <p class="h1"><?= $currentconditions['Wind']['Speed']['Metric']['Value'] ?></p>
                 <p class="align-self-end mb-2 ml-1">km/jam</p>
             </div>
-            <p class="mb-0"><!-- ⬇ --> <?= $currentconditions['Wind']['Direction']['Degrees'] ?></p>
+            <p class="mb-0"><!-- ⬇ --> <?= $this->wind_direction ?></p>
         </div>
     </div>
     <div class="col-sm-4 col-md-4 col-lg-3 p-2">
@@ -84,7 +83,17 @@
         for ($row=0; $row<count($forecasts_5day); $row++) { ?>
             <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2 p-2">
                 <div class="h-100 col col-12 bg-white p-3 rounded-theme-md">
-                    <p class="mb-2 text-center text-muted"><?= $forecasts_5day[$row]['Date'] ?></p>
+                    <!-- <p class="mb-2 text-center text-muted"><?= $forecasts_5day[$row]['Date'] ?></p> -->
+                    <p class="mb-2 text-center text-muted">
+                        <?php
+                            $weather_day = $this->controller->getDay($this->controller->getDate($forecasts_5day[$row]['Date']));
+                            $today = $this->controller->getDay(date('Y-m-d'));
+                            if ($weather_day == $today)
+                                echo "Hari ini";
+                            else
+                                echo $weather_day;
+                        ?>
+                    </p>
                     <div class="row justify-content-center">
                         <img src="https://www.accuweather.com/images/weathericons/<?= $forecasts_5day[$row]['Day']['Icon'] ?>.svg" class="mb-2" width="50" alt="<?= $forecasts_5day[$row]['Day']['IconPhrase'] ?>" />
                     </div>

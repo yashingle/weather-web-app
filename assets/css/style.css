@@ -1,5 +1,6 @@
 body {
     background-color: #F6F6F7 !important;
+    overflow-x: auto !important;
 }
 
 .box-shadow {
@@ -16,4 +17,15 @@ body {
 
 .rounded-theme-lg {
     border-radius: 24px !important;
+}
+
+
+/* Horizontal scrollable */ 
+.horizontal-scrollable > .row {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+.horizontal-scrollable > .row > .col-sm-3 {
+    display: inline-block;
+    float: none;
 }
