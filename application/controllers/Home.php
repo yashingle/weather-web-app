@@ -11,9 +11,8 @@ class Home extends CI_Controller {
 
         // Check if the location is set
         if (!$this->issetLocation()) { // If it is not, set location to default
-            $this->setLocation($this->default_locationkey, $this->default_localizedname, false);
+            $this->setLocation($this->default_locationkey, $this->default_localizedname);
         }
-        // $this->setLocation($this->default_locationkey, $this->default_localizedname);
     }
 
     function issetLocation() {
@@ -24,9 +23,7 @@ class Home extends CI_Controller {
         }
     }
 
-    function setLocation($key = null, $localized_name = null, $is_redirect = true) {
-        // The $is_redirect variabel is used to prevent error of ERR_TOO_MANY_REDIRECTS which happens if it runs on the hosting server
-
+    function setLocation($key = null, $localized_name = null) {
         $location_key = $key ?? $this->input->get('key'); // Location key
         $location_localized_name = $localized_name ?? $this->input->get('localized_name'); // Location name
         
@@ -37,21 +34,15 @@ class Home extends CI_Controller {
             )
         );
 
-        if ($is_redirect)
-            // Starts app from index()
-            redirect(site_url('home'));
+        // Go to index()
+        redirect(site_url('home'));
     }
 
     function index() {
         /* $url = 'http://dataservice.accuweather.com/currentconditions/v1/686870?apikey=A3IPuPja9VrLrx3jxtdxpABvffcZKNLz&language=id&details=true';
 
-        var_dump(get_headers($url));
-        echo "<br>";
-        // json_decode(get_headers($url), true);
-        echo "<br>";
-        echo "<br>";
-        echo json_decode(file_get_contents($url), true)[0]['WeatherText']; */
-
+        var_dump(get_headers($url)[0]);
+        json_decode(get_headers($url), true); */
         $this->location_key = $this->session->location_key;
         $this->location_localized_name = $this->session->location_localized_name;
 
@@ -71,17 +62,6 @@ class Home extends CI_Controller {
             'content' => $this->load->view('contents/home', '', true),
         );
         $this->load->view('view', $view);
-
-        /* echo getenv('PATH');
-        echo "<br>";
-        echo "<br>";
-        echo getenv('SERVER_ADDR');
-        echo "<br>";
-        echo "<br>";
-        echo ENVIRONMENT;
-        echo "<br>";
-        echo "<br>";
-        echo getenv('HOME'); */
     }
 
     function today() {

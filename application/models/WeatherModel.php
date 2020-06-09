@@ -6,7 +6,7 @@ class WeatherModel extends CI_Model {
         $apikey1 = 'A3IPuPja9VrLrx3jxtdxpABvffcZKNLz'; // Punya Hary
         $apikey2 = 'c6myUPul9uLWfQHyijmULMvFX7bKBQDP'; // Punya Agri
         $apikey3 = 'wLWtyVi4LKtuT7Gnvn2IcZLPihHSoBr4'; // Punya Hovi
-        $this->apikey = $apikey1;
+        $this->apikey = $apikey2;
     }
 
     function currentconditions($locationkey) {
