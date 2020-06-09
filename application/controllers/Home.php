@@ -112,7 +112,7 @@ class Home extends CI_Controller {
             $this->wind_direction = $this->getWindDirection($this->currentconditions['Wind']['Direction']['Localized']);
 
             $view = array(
-                'title' => 'Cuaca Hari Ini',
+                'title' => 'Cari Kota',
                 'sidebar' => $this->load->view('components/sidebar', '', true),
                 'search_form' => $this->load->view('components/search_form', '', true),
                 'content' => $this->load->view('contents/search', '', true),
