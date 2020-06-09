@@ -2,7 +2,7 @@
 class Home extends CI_Controller {
     public function __construct() {
         parent::__construct();
-        /* // Load Models
+        // Load Models
         $this->load->model('WeatherModel');
 
         // Default location
@@ -12,7 +12,7 @@ class Home extends CI_Controller {
         // Check if the location is set
         if (!$this->issetLocation()) { // If it is not, set location to default
             $this->setLocation($this->default_locationkey, $this->default_localizedname);
-        } */
+        }
     }
 
     function issetLocation() {
@@ -39,15 +39,16 @@ class Home extends CI_Controller {
     }
 
     function index() {
-        $url = 'http://dataservice.accuweather.com/currentconditions/v1/686870?apikey=A3IPuPja9VrLrx3jxtdxpABvffcZKNLz&language=id&details=true';
+        /* $url = 'http://dataservice.accuweather.com/currentconditions/v1/686870?apikey=A3IPuPja9VrLrx3jxtdxpABvffcZKNLz&language=id&details=true';
 
         var_dump(get_headers($url));
         echo "<br>";
         // json_decode(get_headers($url), true);
         echo "<br>";
-        echo json_decode(file_get_contents($url), true)[0]['WeatherText'];
+        echo "<br>";
+        echo json_decode(file_get_contents($url), true)[0]['WeatherText']; */
 
-        /* $this->location_key = $this->session->location_key;
+        $this->location_key = $this->session->location_key;
         $this->location_localized_name = $this->session->location_localized_name;
 
         $this->currentconditions = $this->WeatherModel->currentconditions($this->location_key);
@@ -65,7 +66,8 @@ class Home extends CI_Controller {
             'search_form' => $this->load->view('components/search_form', '', true),
             'content' => $this->load->view('contents/home', '', true),
         );
-        $this->load->view('view', $view); */
+        $this->load->view('view', $view);
+        
         /* echo getenv('PATH');
         echo "<br>";
         echo "<br>";
