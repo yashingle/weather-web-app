@@ -41,34 +41,30 @@ class Home extends CI_Controller {
     }
 
     function index() {
-        session_start();
-        /* $url = 'http://dataservice.accuweather.com/currentconditions/v1/686870?apikey=A3IPuPja9VrLrx3jxtdxpABvffcZKNLz&language=id&details=true';
-
-        var_dump(get_headers($url)[0]);
-        json_decode(get_headers($url), true); */
-        /* $this->location_key = $this->session->location_key;
+        $this->location_key = $this->session->location_key;
         $this->location_localized_name = $this->session->location_localized_name;
 
         $this->currentconditions = $this->WeatherModel->currentconditions($this->location_key);
         $this->forecasts_5day = $this->WeatherModel->forecasts_5day($this->location_key);
         
-        $this->controller = $this;
-        $this->date = $this->getDate($this->currentconditions['LocalObservationDateTime']);
-        $this->time = $this->getTime($this->currentconditions['LocalObservationDateTime']);
-        $this->day = $this->getDay($this->date);
-        $this->wind_direction = $this->getWindDirection($this->currentconditions['Wind']['Direction']['Localized']);
+        // Check if api key limit has been reached
+        if ($this->currentconditions != false && $this->forecasts_5day != false) { // If the limit has not been reached (available)
+            $this->controller = $this;
+            $this->date = $this->getDate($this->currentconditions['LocalObservationDateTime']);
+            $this->time = $this->getTime($this->currentconditions['LocalObservationDateTime']);
+            $this->day = $this->getDay($this->date);
+            $this->wind_direction = $this->getWindDirection($this->currentconditions['Wind']['Direction']['Localized']);
 
-        $view = array(
-            'title' => 'Cuaca',
-            'sidebar' => $this->load->view('components/sidebar', '', true),
-            'search_form' => $this->load->view('components/search_form', '', true),
-            'content' => $this->load->view('contents/home', '', true),
-        );
-        $this->load->view('view', $view); */
-        
-        echo "Current location: " . $this->session->location_localized_name . "<br>";
-        $this->session->set_userdata('location_localized_name', 'Jakarta');
-        echo "Location after changed: " . $this->session->location_localized_name . "<br>";
+            $view = array(
+                'title' => 'Cuaca',
+                'sidebar' => $this->load->view('components/sidebar', '', true),
+                'search_form' => $this->load->view('components/search_form', '', true),
+                'content' => $this->load->view('contents/home', '', true),
+            );
+            $this->load->view('view', $view);
+        } else { // If the limit has been reached
+            $this->load->view('apikey_limit_reached');
+        }
     }
 
     function today() {
@@ -78,19 +74,24 @@ class Home extends CI_Controller {
         $this->currentconditions = $this->WeatherModel->currentconditions($this->location_key);
         $this->forecasts_12hour = $this->WeatherModel->forecasts_12hour($this->location_key);
         
-        $this->controller = $this;
-        $this->date = $this->getDate($this->currentconditions['LocalObservationDateTime']);
-        $this->time = $this->getTime($this->currentconditions['LocalObservationDateTime']);
-        $this->day = $this->getDay($this->date);
-        $this->wind_direction = $this->getWindDirection($this->currentconditions['Wind']['Direction']['Localized']);
+        // Check if api key limit has been reached
+        if ($this->currentconditions != false && $this->forecasts_12hour != false) { // If the limit has not been reached (available)
+            $this->controller = $this;
+            $this->date = $this->getDate($this->currentconditions['LocalObservationDateTime']);
+            $this->time = $this->getTime($this->currentconditions['LocalObservationDateTime']);
+            $this->day = $this->getDay($this->date);
+            $this->wind_direction = $this->getWindDirection($this->currentconditions['Wind']['Direction']['Localized']);
 
-        $view = array(
-            'title' => 'Cuaca Hari Ini',
-            'sidebar' => $this->load->view('components/sidebar', '', true),
-            'search_form' => $this->load->view('components/search_form', '', true),
-            'content' => $this->load->view('contents/today', '', true),
-        );
-        $this->load->view('view', $view);
+            $view = array(
+                'title' => 'Cuaca Hari Ini',
+                'sidebar' => $this->load->view('components/sidebar', '', true),
+                'search_form' => $this->load->view('components/search_form', '', true),
+                'content' => $this->load->view('contents/today', '', true),
+            );
+            $this->load->view('view', $view);
+        } else { // If the limit has been reached
+            $this->load->view('apikey_limit_reached');
+        }
     }
     
     function search() {
@@ -102,19 +103,24 @@ class Home extends CI_Controller {
         $this->currentconditions = $this->WeatherModel->currentconditions($this->location_key);
         $this->search = $this->WeatherModel->search($keyword);
         
-        $this->controller = $this;
-        $this->date = $this->getDate($this->currentconditions['LocalObservationDateTime']);
-        $this->time = $this->getTime($this->currentconditions['LocalObservationDateTime']);
-        $this->day = $this->getDay($this->date);
-        $this->wind_direction = $this->getWindDirection($this->currentconditions['Wind']['Direction']['Localized']);
+        // Check if api key limit has been reached
+        if ($this->currentconditions != false && $this->search != false) { // If the limit has not been reached (available)
+            $this->controller = $this;
+            $this->date = $this->getDate($this->currentconditions['LocalObservationDateTime']);
+            $this->time = $this->getTime($this->currentconditions['LocalObservationDateTime']);
+            $this->day = $this->getDay($this->date);
+            $this->wind_direction = $this->getWindDirection($this->currentconditions['Wind']['Direction']['Localized']);
 
-        $view = array(
-            'title' => 'Cuaca Hari Ini',
-            'sidebar' => $this->load->view('components/sidebar', '', true),
-            'search_form' => $this->load->view('components/search_form', '', true),
-            'content' => $this->load->view('contents/search', '', true),
-        );
-        $this->load->view('view', $view);
+            $view = array(
+                'title' => 'Cuaca Hari Ini',
+                'sidebar' => $this->load->view('components/sidebar', '', true),
+                'search_form' => $this->load->view('components/search_form', '', true),
+                'content' => $this->load->view('contents/search', '', true),
+            );
+            $this->load->view('view', $view);
+        } else { // If the limit has been reached
+            $this->load->view('apikey_limit_reached');
+        }
     }
 
     function getDate($waktu) {
