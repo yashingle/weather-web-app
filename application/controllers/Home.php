@@ -45,7 +45,7 @@ class Home extends CI_Controller {
 
         var_dump(get_headers($url)[0]);
         json_decode(get_headers($url), true); */
-        $this->location_key = $this->session->location_key;
+        /* $this->location_key = $this->session->location_key;
         $this->location_localized_name = $this->session->location_localized_name;
 
         $this->currentconditions = $this->WeatherModel->currentconditions($this->location_key);
@@ -63,7 +63,11 @@ class Home extends CI_Controller {
             'search_form' => $this->load->view('components/search_form', '', true),
             'content' => $this->load->view('contents/home', '', true),
         );
-        $this->load->view('view', $view);
+        $this->load->view('view', $view); */
+        
+        echo "Current location: " . $this->session->location_localized_name . "<br>";
+        $this->session->set_userdata('location_localized_name', 'Jakarta');
+        echo "Location after changed: " . $this->session->location_localized_name . "<br>";
     }
 
     function today() {

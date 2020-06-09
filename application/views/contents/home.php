@@ -87,8 +87,7 @@
                     <p class="mb-2 text-center text-muted">
                         <?php
                             $weather_day = $this->controller->getDay($this->controller->getDate($forecasts_5day[$row]['Date']));
-                            $today = $this->controller->getDay(date('Y-m-d'));
-                            if ($weather_day == $today)
+                            if ($weather_day == $this->day)
                                 echo "Hari ini";
                             else
                                 echo $weather_day;
