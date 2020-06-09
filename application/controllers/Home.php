@@ -41,6 +41,7 @@ class Home extends CI_Controller {
     }
 
     function index() {
+        session_start();
         /* $url = 'http://dataservice.accuweather.com/currentconditions/v1/686870?apikey=A3IPuPja9VrLrx3jxtdxpABvffcZKNLz&language=id&details=true';
 
         var_dump(get_headers($url)[0]);
