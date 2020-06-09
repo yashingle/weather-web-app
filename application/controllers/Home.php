@@ -43,9 +43,9 @@ class Home extends CI_Controller {
 
         var_dump(get_headers($url));
         echo "<br>";
-        json_decode(get_headers($url), true);
+        // json_decode(get_headers($url), true);
         echo "<br>";
-        var_dump(json_decode(get_headers($url), true));
+        echo json_decode(file_get_contents($url), true)[0]['WeatherText'];
 
         /* $this->location_key = $this->session->location_key;
         $this->location_localized_name = $this->session->location_localized_name;
