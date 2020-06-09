@@ -11,7 +11,7 @@ class Home extends CI_Controller {
 
         // Check if the location is set
         if (!$this->issetLocation()) { // If it is not, set location to default
-            $this->setLocation($this->default_locationkey, $this->default_localizedname);
+            $this->setLocation($this->default_locationkey, $this->default_localizedname, false);
         }
     }
 
@@ -23,7 +23,7 @@ class Home extends CI_Controller {
         }
     }
 
-    function setLocation($key = null, $localized_name = null) {
+    function setLocation($key = null, $localized_name = null, $is_redirect = true) {
         $location_key = $key ?? $this->input->get('key'); // Location key
         $location_localized_name = $localized_name ?? $this->input->get('localized_name'); // Location name
         
@@ -34,8 +34,10 @@ class Home extends CI_Controller {
             )
         );
 
-        // Go to index()
-        redirect(site_url('home'));
+        if ($is_redirect) {
+            // Go to index()
+            redirect(site_url('home'));
+        }
     }
 
     function index() {
