@@ -10,9 +10,10 @@ class Home extends CI_Controller {
         $this->default_localizedname = 'Cimahi';
 
         // Check if the location is set
-        if (!$this->issetLocation()) { // If it is not, set location to default
+        /* if (!$this->issetLocation()) { // If it is not, set location to default
             $this->setLocation($this->default_locationkey, $this->default_localizedname);
-        }
+        } */
+        $this->setLocation($this->default_locationkey, $this->default_localizedname);
     }
 
     function issetLocation() {
@@ -34,8 +35,8 @@ class Home extends CI_Controller {
             )
         );
 
-        // Go to index()
-        redirect(site_url('home'));
+        // Starts app from index()
+        // redirect(site_url('home'));
     }
 
     function index() {
@@ -67,7 +68,7 @@ class Home extends CI_Controller {
             'content' => $this->load->view('contents/home', '', true),
         );
         $this->load->view('view', $view);
-        
+
         /* echo getenv('PATH');
         echo "<br>";
         echo "<br>";
