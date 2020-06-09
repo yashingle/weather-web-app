@@ -39,10 +39,14 @@ class Home extends CI_Controller {
     }
 
     function index() {
-        /* $url = 'http://dataservice.accuweather.com/currentconditions/v1/686870?apikey=A3IPuPja9VrLrx3jxtdxpABvffcZKNLz&language=id&details=true';
+        $url = 'http://dataservice.accuweather.com/currentconditions/v1/686870?apikey=A3IPuPja9VrLrx3jxtdxpABvffcZKNLz&language=id&details=true';
 
-        var_dump(get_headers($url)[0]);
-        json_decode(get_headers($url), true); */
+        var_dump(get_headers($url));
+        echo "<br>";
+        json_decode(get_headers($url), true);
+        echo "<br>";
+        var_dump(json_decode(get_headers($url), true));
+
         /* $this->location_key = $this->session->location_key;
         $this->location_localized_name = $this->session->location_localized_name;
 
@@ -62,7 +66,7 @@ class Home extends CI_Controller {
             'content' => $this->load->view('contents/home', '', true),
         );
         $this->load->view('view', $view); */
-        echo getenv('PATH');
+        /* echo getenv('PATH');
         echo "<br>";
         echo "<br>";
         echo getenv('SERVER_ADDR');
@@ -71,7 +75,7 @@ class Home extends CI_Controller {
         echo ENVIRONMENT;
         echo "<br>";
         echo "<br>";
-        echo getenv('HOME');
+        echo getenv('HOME'); */
     }
 
     function today() {
