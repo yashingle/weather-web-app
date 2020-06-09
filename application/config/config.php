@@ -23,8 +23,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-// $config['base_url'] = 'http://localhost/tubes-tekweb/'; // used for running app on local
-$config['base_url'] = 'https://kabar-langit.herokuapp.com/'; // used for running app on heroku
+
+$whitelist = array(
+    '127.0.0.1',
+    '::1'
+);
+
+// Check if the app runs on localhost or web hosting
+if (!in_array($_SERVER['REMOTE_ADDR'], $whitelist)) { // If runs on localhost
+    $config['base_url'] = 'https://kabar-langit.herokuapp.com/';
+} else { // If runs on web hosting
+    $config['base_url'] = 'http://localhost/tubes-tekweb/';
+}
 
 /*
 |--------------------------------------------------------------------------
