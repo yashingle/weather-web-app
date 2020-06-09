@@ -10,10 +10,10 @@ class Home extends CI_Controller {
         $this->default_localizedname = 'Cimahi';
 
         // Check if the location is set
-        /* if (!$this->issetLocation()) { // If it is not, set location to default
-            $this->setLocation($this->default_locationkey, $this->default_localizedname);
-        } */
-        $this->setLocation($this->default_locationkey, $this->default_localizedname);
+        if (!$this->issetLocation()) { // If it is not, set location to default
+            $this->setLocation($this->default_locationkey, $this->default_localizedname, false);
+        }
+        // $this->setLocation($this->default_locationkey, $this->default_localizedname);
     }
 
     function issetLocation() {
@@ -24,7 +24,9 @@ class Home extends CI_Controller {
         }
     }
 
-    function setLocation($key = null, $localized_name = null) {
+    function setLocation($key = null, $localized_name = null, $is_redirect = true) {
+        // The $is_redirect variabel is used to prevent error of ERR_TOO_MANY_REDIRECTS which happens if it runs on the hosting server
+
         $location_key = $key ?? $this->input->get('key'); // Location key
         $location_localized_name = $localized_name ?? $this->input->get('localized_name'); // Location name
         
@@ -35,8 +37,9 @@ class Home extends CI_Controller {
             )
         );
 
-        // Starts app from index()
-        // redirect(site_url('home'));
+        if ($is_redirect)
+            // Starts app from index()
+            redirect(site_url('home'));
     }
 
     function index() {
