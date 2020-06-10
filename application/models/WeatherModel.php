@@ -2,12 +2,7 @@
 class WeatherModel extends CI_Model {
     public function __construct() {
         parent::__construct();
-        // API keys, each key has 50 request quota per day
-        $apikey1 = 'A3IPuPja9VrLrx3jxtdxpABvffcZKNLz'; // Punya Hary
-        $apikey2 = 'c6myUPul9uLWfQHyijmULMvFX7bKBQDP'; // Punya Agri
-        $apikey3 = 'wLWtyVi4LKtuT7Gnvn2IcZLPihHSoBr4'; // Punya Hovi
-        $this->apikey = $apikey2;
-
+        // API keys, each key has quota of 50 request per day
         $this->apikeys = array(
             'A3IPuPja9VrLrx3jxtdxpABvffcZKNLz',
             'c6myUPul9uLWfQHyijmULMvFX7bKBQDP',
