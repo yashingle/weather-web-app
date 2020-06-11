@@ -27,7 +27,11 @@
 </head>
 
 <body>
+
+    <!-- Shows which API key is being used -->
+    <input type="hidden" value="<?= $this->session->selected_apikey ?>" />
     
+    <!-- Page starts here -->
     <div class="d-flex" id="wrapper">
 
         <!-- Sidebar -->

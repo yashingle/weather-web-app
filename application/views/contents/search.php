@@ -23,15 +23,26 @@
 <div class="row d-flex justify-content-between mx-0 mt-4 mb-2">
     <div><p class="font-weight-bold mb-0">Hasil Pencarian</p></div>
 </div>
-<div class="list-group">
-    <?php
-        $search = $this->search;
-        for ($row=0; $row<count($search); $row++) { ?>
-            <a href="<?= site_url('home/setLocation') . '/' . $search[$row]['Key'] . '/' . $search[$row]['LocalizedName'] ?>" class="list-group-item list-group-item-action col h-100 col-12 bg-white mb-3 m-0 py-3 px-4 border-0 rounded-theme-md">
-                <p class="h5 mb-0"><?= $search[$row]['LocalizedName'] ?></p>
-                <p class="mb-0 text-muted"><?= $search[$row]['AdministrativeArea']['LocalizedName'] ?>, <?= $search[$row]['Country']['LocalizedName'] ?></p>
-            </a>
+<?php
+    $search = $this->search;
+
+    if (count($search) > 0) { ?>
+        <div class="list-group">
             <?php
-        }
-    ?>
-</div>
+                for ($row=0; $row<count($search); $row++) { ?>
+                    <a href="<?= site_url('home/setLocation') . '/' . $search[$row]['Key'] . '/' . $search[$row]['LocalizedName'] ?>" class="list-group-item list-group-item-action col h-100 col-12 bg-white mb-3 m-0 py-3 px-4 border-0 rounded-theme-md">
+                        <p class="h5 mb-0"><?= $search[$row]['LocalizedName'] ?></p>
+                        <p class="mb-0 text-muted"><?= $search[$row]['AdministrativeArea']['LocalizedName'] ?>, <?= $search[$row]['Country']['LocalizedName'] ?></p>
+                    </a>
+                    <?php
+                }
+            ?>
+        </div>
+        <?php
+    } else { ?>
+        <div class="row mx-n2 p-2">
+            <p class="col-12 mb-0 text-center">Kota tidak ditemukan</p>
+        </div>
+        <?php
+    }
+?>

@@ -2,7 +2,7 @@
 class WeatherModel extends CI_Model {
     public function __construct() {
         parent::__construct();
-        // API keys, each key has quota of 50 request per day
+        // API keys, each key has quota of 50 requests per day
         $this->apikeys = array(
             'A3IPuPja9VrLrx3jxtdxpABvffcZKNLz',
             'c6myUPul9uLWfQHyijmULMvFX7bKBQDP',
@@ -29,12 +29,14 @@ class WeatherModel extends CI_Model {
             // echo "Trying to get new api key." . "<br>";
             
             if (!$this->setNewApiKey()) {
+                $this->session->set_userdata('selected_apikey', null);
                 return false;
                 break;
             }
             // echo "Checking api key: [" . $this->selected_apikeys_index . "]" . $this->apikeys[$this->selected_apikeys_index] . "<br>";
         }
-
+        
+        $this->session->set_userdata('selected_apikey', "[" . $this->selected_apikeys_index . "]" . $this->apikeys[$this->selected_apikeys_index]);
         return $cuaca_hari_ini;
     }
 

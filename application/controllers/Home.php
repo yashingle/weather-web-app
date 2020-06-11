@@ -102,9 +102,9 @@ class Home extends CI_Controller {
 
         $this->currentconditions = $this->WeatherModel->currentconditions($this->location_key);
         $this->search = $this->WeatherModel->search($keyword);
-        
+
         // Check if api key limit has been reached
-        if ($this->currentconditions != false && $this->search != false) { // If the limit has not been reached (available)
+        if ($this->currentconditions != false && ($this->search != false || isset($this->search))) { // If the limit has not been reached (available)
             $this->controller = $this;
             $this->date = $this->getDate($this->currentconditions['LocalObservationDateTime']);
             $this->time = $this->getTime($this->currentconditions['LocalObservationDateTime']);

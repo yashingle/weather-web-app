@@ -110,8 +110,8 @@
 <div class="row d-flex justify-content-between mx-0 mt-4 mb-2">
     <div><p class="font-weight-bold mb-0">Cuaca Hari Ini</p></div>
 </div>
-<div class="row mx-n1" style="overflow-x: auto;">
-    <div class="row flex-row flex-nowrap mx-n2">
+<div class="row mx-n1">
+    <div class="row mx-n2">
     
         <?php
             for ($row=0; $row<count($forecasts_12hour); $row++) {
@@ -121,10 +121,7 @@
                 $diff = date_diff($date_now, $date_weather);
 
                 if ($diff->format("%R") == "+" && $diff->format("%a") == "0") { ?>
-                    <div class="col-xs-8 col-sm-2 p-2">
-                    <!-- <div class="col-xs-6 col-sm-4 col-md-2 p-2"> -->
-                    <!-- <div class="col-sm-3 p-2"> -->
-                    <!-- <div class="p-2" style="width: 190px;"> -->
+                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 p-2">
                         <div class="h-100 col col-12 bg-white p-3 rounded-theme-md">
                             <p class="mb-2 text-center text-muted"><?= $this->controller->getTime($forecasts_12hour[$row]['DateTime']) ?></p>
                             <div class="row justify-content-center">
@@ -147,3 +144,38 @@
 
     </div>
 </div>
+
+<!-- <div class="row mx-n1" style="overflow-x: auto;">
+    <div class="row flex-row flex-nowrap mx-n2">
+    
+        <?php
+            for ($row=0; $row<count($forecasts_12hour); $row++) {
+                // Menampilkan hanya data yang memiliki tanggal sekarang
+                $date_now = date_create(Date('Y-m-d'));
+                $date_weather = date_create($this->controller->getDate($forecasts_12hour[$row]['DateTime']));
+                $diff = date_diff($date_now, $date_weather);
+
+                if ($diff->format("%R") == "+" && $diff->format("%a") == "0") { ?>
+                    <div class="col-xs-8 col-sm-2 p-2">
+                        <div class="h-100 col col-12 bg-white p-3 rounded-theme-md">
+                            <p class="mb-2 text-center text-muted"><?= $this->controller->getTime($forecasts_12hour[$row]['DateTime']) ?></p>
+                            <div class="row justify-content-center">
+                                <img src="https://www.accuweather.com/images/weathericons/<?= $forecasts_12hour[$row]['WeatherIcon'] ?>.svg" class="mb-2" width="50" alt="<?= $forecasts_12hour[$row]['IconPhrase'] ?>" />
+                            </div>
+                            <p class="text-center mb-1"><?= $forecasts_12hour[$row]['IconPhrase'] ?></p>
+                            <div class="row mb-1 justify-content-center">
+                                <p class="mb-0 mr-1"><?= $forecasts_12hour[$row]['Temperature']['Value'] ?>°C</p>
+                                <p class="mb-0 text-muted"><?= $forecasts_12hour[$row]['RealFeelTemperature']['Value'] ?>°C</p>
+                            </div>
+                            <p class="text-center mb-1"><?= $this->controller->getWindDirection($forecasts_12hour[$row]['Wind']['Direction']['Localized']) ?> - <?= $forecasts_12hour[$row]['Wind']['Speed']['Value'] ?>km/j</p>
+                            <p class="text-center mb-1"><?= $forecasts_12hour[$row]['UVIndex']; ?> (<?= $forecasts_12hour[$row]['UVIndexText'] ?>)</p>
+                            <p class="text-center mb-1"><?= $forecasts_12hour[$row]['RelativeHumidity'] ?>%</p>
+                        </div>
+                    </div>
+                    <?php
+                }
+            }
+        ?>
+
+    </div>
+</div> -->
