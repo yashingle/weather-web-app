@@ -27,7 +27,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 if (!in_array($_SERVER['REMOTE_ADDR'], array('127.0.0.1', '::1'))) { // If runs on localhost
     $config['base_url'] = 'https://kabar-langit.000webhostapp.com/';
 } else { // If runs on web hosting
-    $config['base_url'] = 'http://localhost/tubes-tekweb/';
+    $config['base_url'] = 'http://localhost/weather-web-app/';
 }
 
 /*
