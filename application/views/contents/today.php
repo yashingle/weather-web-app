@@ -121,7 +121,7 @@
                 $diff = date_diff($date_now, $date_weather);
 
                 if ($diff->format("%R") == "+" && $diff->format("%a") == "0") { ?>
-                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 p-2">
+                    <div class="col-sm-6 p-2">
                         <div class="h-100 col col-12 bg-white p-3 rounded-theme-md">
                             <p class="mb-2 text-center text-muted"><?= $this->controller->getTime($forecasts_12hour[$row]['DateTime']) ?></p>
                             <div class="row justify-content-center">

@@ -12,5 +12,9 @@
 
     <p class="h1 mb-3"><?= $currentconditions['Temperature']['Metric']['Value'] ?>°C</p>
     <p><!-- 🌩  --><?= $currentconditions['WeatherText'] ?></p>
+
+    <p class="mt-auto text-muted">
+        <small>Klik <a href="<?= site_url('credit') ?>">di sini</a> untuk mengetahu pengembang web ini.</small>
+    </p>
 </div>
 <!-- /#sidebar-wrapper -->

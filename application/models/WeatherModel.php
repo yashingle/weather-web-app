@@ -36,7 +36,7 @@ class WeatherModel extends CI_Model {
             // echo "Checking api key: [" . $this->selected_apikeys_index . "]" . $this->apikeys[$this->selected_apikeys_index] . "<br>";
         }
         
-        $this->session->set_userdata('selected_apikey', "[" . $this->selected_apikeys_index . "]" . $this->apikeys[$this->selected_apikeys_index]);
+        $this->session->set_userdata('selected_apikey', $this->selected_apikeys_index);
         return $cuaca_hari_ini;
     }
 
